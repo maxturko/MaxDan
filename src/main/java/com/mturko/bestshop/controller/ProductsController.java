@@ -30,10 +30,7 @@ public class ProductsController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Product addProduct(@RequestBody Map<String, Object> payload) {
-        ProductDto productDto = new ProductDto();
-        productDto.setName(payload.get("name").toString());
-        productDto.setPrice(Integer.parseInt(payload.get("price").toString()));
+    public Product addProduct(@RequestBody ProductDto productDto) {
         return productService.addProduct(productDto);
     }
 }
