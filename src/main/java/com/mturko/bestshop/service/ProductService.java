@@ -3,6 +3,7 @@ package com.mturko.bestshop.service;
 import com.mturko.bestshop.model.Product;
 import com.mturko.bestshop.model.dto.ProductDto;
 import com.mturko.bestshop.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,11 +12,19 @@ import java.util.List;
 @Service
 public class ProductService {
 
+    @Autowired
+    private ProductRepository productRepository;
+
+    public ProductService() {
+    }
+
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    private final ProductRepository productRepository;
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public Product addProduct(ProductDto productDto) {
         Product product = new Product();

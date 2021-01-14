@@ -1,13 +1,14 @@
 package com.mturko.bestshop;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-@SpringBootApplication
 public class BestShopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BestShopApplication.class, args);
+		ApplicationContext appContext = new ClassPathXmlApplicationContext(
+				"spring-config.xml");
+
 	}
 
 }
