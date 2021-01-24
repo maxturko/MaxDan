@@ -1,6 +1,8 @@
 package com.mturko.bestshop.model;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
@@ -8,8 +10,6 @@ import java.time.LocalDateTime;
  public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
     private int id;
     private String name;
     private int price;
