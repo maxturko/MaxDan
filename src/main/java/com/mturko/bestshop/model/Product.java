@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product")
- public class Product {
+ public class Product extends AbstractEntity{
 
     @Id
     private int id;
