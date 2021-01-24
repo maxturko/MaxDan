@@ -22,7 +22,7 @@
             </property>
             <property name="jpaProperties">
                 <props>
-                    <prop key="hibernate.hbm2ddl.auto">validate</prop>
+                    <prop key="hibernate.hbm2ddl.auto">update</prop>
                     <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
                 </props>
             </property>
@@ -45,7 +45,6 @@
 
         <context:component-scan base-package="com.mturko.bestshop.controller"/>
         <context:component-scan base-package="com.mturko.bestshop.service"/>
-        <jpa:repositories base-package="com.mturko.bestshop.repository"/>
-
+        <import resource="persistence.xml"/>
 
 </beans>
