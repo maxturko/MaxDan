@@ -1,27 +1,19 @@
 package com.mturko.bestshop.model;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product")
  public class Product extends AbstractEntity{
 
-    @Id
-    private int id;
+//    @Id
+//    @GeneratedValue
+//    @Column(name = "ID")
+//    private Long id;
     private String name;
     private int price;
     private LocalDateTime creationDate;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -50,7 +42,7 @@ import java.time.LocalDateTime;
     @Override
     public String toString() {
         return "Product{" +
-                "id='" + id + '\'' +
+                "id='" + getId() + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", creationDate=" + creationDate +

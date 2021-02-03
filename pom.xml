@@ -18,6 +18,7 @@
 		<maven-compiler-plugin-version>3.8.0</maven-compiler-plugin-version>
 		<liquibase-maven-plugin-version>3.8.0</liquibase-maven-plugin-version>
 		<slf4j-simple-version>1.7.30</slf4j-simple-version>
+		<servlet-api-version>3.0.1</servlet-api-version>
 	</properties>
 
 
@@ -62,13 +63,25 @@
 			<version>${spring-orm-version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j-simple-version}</version>
+		</dependency>-->
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet-api-version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
 
 	</dependencies>
 
@@ -93,7 +106,8 @@
 						</goals>
 						<phase>process-resources</phase>
 						<configuration>
-							<propertyFile>db/migration/liquibase.properties</propertyFile>
+							<propertyFile>db.properties</propertyFile>
+							<changeLogFile>db\migration\dbchangelog.xml</changeLogFile>
 						</configuration>
 					</execution>
 				</executions>

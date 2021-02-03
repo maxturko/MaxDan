@@ -2,49 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
 
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+        <mvc:annotation-driven/>
+        <mvc:default-servlet-handler/>
         <context:property-placeholder location="classpath*:db.properties"/>
-        <import resource="persistence.xml"/>
-
-        <bean id="entityManagerFactory"
-              class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-            <property name="dataSource" ref="dataSource" />
-            <property name="packagesToScan" value="com.mturko.bestshop.model" />
-            <property name="jpaVendorAdapter">
-                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-            </property>
-            <property name="jpaProperties">
-                <props>
-                    <prop key="hibernate.hbm2ddl.auto">update</prop>
-                    <prop key="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</prop>
-                </props>
-            </property>
-        </bean>
-
-        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-            <property name="driverClassName" value="${jdbc.driverClassName}" />
-            <property name="url" value="${jdbc.url}" />
-            <property name="username" value="${jdbc.username}" />
-            <property name="password" value="${jdbc.password}" />
-        </bean>
-
-        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-            <property name="entityManagerFactory" ref="entityManagerFactory" />
-        </bean>
-        <tx:annotation-driven />
-
-        <bean id="persistenceExceptionTranslationPostProcessor" class=
-                "org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-
         <context:component-scan base-package="com.mturko.bestshop.controller"/>
         <context:component-scan base-package="com.mturko.bestshop.service"/>
+        <import resource="persistence.xml"/>
+
+
 
 </beans>
