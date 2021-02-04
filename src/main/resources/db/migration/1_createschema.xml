@@ -136,12 +136,10 @@
             <column name="created_on" type="varchar(20)"/>
             <column name="updated_on" type="varchar(20)"/>
             <column name="product_id" type="BIGINT(20)">
-                <constraints foreignKeyName="fk_rating_product_id" references="product(id)"
-                             primaryKey="true" nullable="false"/>
+                <constraints foreignKeyName="fk_rating_product_id" references="product(id)"/>
             </column>
             <column  name="user_id" type="BIGINT(20)">
-                <constraints foreignKeyName="fk_rating_user_id" references="user(id)"
-                             primaryKey="true" nullable="false"/>
+                <constraints foreignKeyName="fk_rating_user_id" references="user(id)"/>
             </column>
             <column name="rating" type="varchar(50)"/>
         </createTable>
