@@ -3,6 +3,7 @@ package com.mturko.bestshop.controller;
 import com.mturko.bestshop.model.Product;
 import com.mturko.bestshop.model.dto.ProductDto;
 import com.mturko.bestshop.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ public class ProductController {
 
     private final ProductService productService;
 
+    @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }

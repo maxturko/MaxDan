@@ -1,23 +1,19 @@
 package com.mturko.bestshop.model;
 
-import org.springframework.data.annotation.Id;
-
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-public class Product {
-    @Id
-    private String id;
+@Entity
+@Table(name = "product")
+ public class Product extends AbstractEntity{
+
+//    @Id
+//    @GeneratedValue
+//    @Column(name = "ID")
+//    private Long id;
     private String name;
     private int price;
     private LocalDateTime creationDate;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -41,5 +37,15 @@ public class Product {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + getId() + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", creationDate=" + creationDate +
+                '}';
     }
 }
