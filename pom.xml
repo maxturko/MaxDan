@@ -19,6 +19,7 @@
 		<liquibase-maven-plugin-version>3.8.0</liquibase-maven-plugin-version>
 		<slf4j-simple-version>1.7.30</slf4j-simple-version>
 		<servlet-api-version>3.0.1</servlet-api-version>
+		<logback-classic-version>1.2.3</logback-classic-version>
 	</properties>
 
 
@@ -80,12 +81,21 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<version>${logback-classic-version}</version>
 		</dependency>
 
 	</dependencies>
 
 	<build>
+		<filters>
+			<filter>src/main/resources/db.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -106,7 +116,7 @@
 						</goals>
 						<phase>process-resources</phase>
 						<configuration>
-							<propertyFile>db.properties</propertyFile>
+							<propertyFile>liquibase.properties</propertyFile>
 							<changeLogFile>db\migration\dbchangelog.xml</changeLogFile>
 						</configuration>
 					</execution>
