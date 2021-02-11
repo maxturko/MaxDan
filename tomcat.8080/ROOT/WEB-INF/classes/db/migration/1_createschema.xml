@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet  id="1.1"  author="Max">
+        <createTable  tableName="user">
+            <column name="id" type="BIGINT(20)">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column  name="firstname"  type="varchar(50)"/>
+            <column  name="lastname"  type="varchar(50)"/>
+            <column  name="email"  type="varchar(50)"/>
+            <column  name="phonenumber"  type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.2" author="Max">
+        <createTable tableName="order">
+            <column name="id" type="BIGINT(20)">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column  name="user_id"  type="BIGINT(20)">
+                <constraints foreignKeyName="fk_order_user_id" references="user(id)"/>
+            </column>
+            <column name="date" type="varchar(50)"/>
+            <column name="status" type="varchar(10)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.3" author="Max">
+        <createTable tableName="product">
+            <column name="id" type="BIGINT(20)">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="price" type="varchar(50)"/>
+            <column name="valid_from" type="varchar(20)"/>
+            <column name="valid_to" type="varchar(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.4" author="Max">
+        <createTable tableName="comment">
+            <column name="id" type="BIGINT(20)">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column name="creationdate" type="varchar(50)"/>
+            <column name="content" type="varchar(1000)"/>
+            <column name="product_id" type="BIGINT(20)">
+                <constraints foreignKeyName="fk_comment_product_id" references="product(id)"/>
+            </column>
+            <column  name="user_id" type="BIGINT(20)">
+                <constraints foreignKeyName="fk_comment_user_id" references="user(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.5" author="Max">
+        <createTable tableName="productcategory">
+            <column name="id" type="BIGINT(20)">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column name="name" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.6" author="Max">
+        <createTable tableName="role">
+            <column name="id" type="BIGINT(20)">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column name="name" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.7" author="Max">
+        <createTable tableName="user_roles">
+            <column name="id" type="BIGINT(20)">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column  name="user_id"  type="BIGINT(20)">
+                <constraints foreignKeyName="fk_user_roles_user_id" references="user(id)"/>
+            </column>
+            <column  name="role_id"  type="BIGINT(20)">
+                <constraints foreignKeyName="fk_user_roles_role_id" references="role(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.8" author="Max">
+        <createTable tableName="order_item">
+            <column name="id" type="BIGINT(20)">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column  name="order_id"  type="BIGINT(20)">
+                <constraints foreignKeyName="fk_order_item_order_id" references="`order`(id)"/>
+            </column>
+            <column  name="product_id"  type="BIGINT(20)">
+                <constraints foreignKeyName="fk_order_item_product_id" references="product(id)"/>
+            </column>
+            <column name="amount" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.9" author="Max">
+        <createTable tableName="product_categories">
+            <column name="id" type="BIGINT(20)">
+                <constraints  primaryKey="true"  nullable="false"/>
+            </column>
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column  name="product_id"  type="BIGINT(20)">
+                <constraints foreignKeyName="fk_product_categories_product_id" references="product(id)"/>
+            </column>
+            <column  name="category_id"  type="BIGINT(20)">
+                <constraints foreignKeyName="fk_product_categories_productcategory_id" references="productcategory(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.10" author="Max">
+        <createTable tableName="rating">
+            <column name="created_on" type="varchar(20)"/>
+            <column name="updated_on" type="varchar(20)"/>
+            <column name="product_id" type="BIGINT(20)">
+                <constraints foreignKeyName="fk_rating_product_id" references="product(id)"/>
+            </column>
+            <column  name="user_id" type="BIGINT(20)">
+                <constraints foreignKeyName="fk_rating_user_id" references="user(id)"/>
+            </column>
+            <column name="rating" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.11" author="Max">
+        <addPrimaryKey tableName="rating" columnNames="product_id, user_id" validate="true" constraintName="pk_rating"/>
+    </changeSet>
+</databaseChangeLog>
