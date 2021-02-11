@@ -1,17 +1,9 @@
 package com.mturko.bestshop;
 
-import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
 
-
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 public class BestShopApplication {
 
@@ -24,7 +16,7 @@ public class BestShopApplication {
 		tomcat.setHostname("localhost");
 
 		String contextPath = "/";
-		String warFilePath = "D:\\Projects\\bestShop\\target\\bestShop-0.0.1-SNAPSHOT.war";
+		String warFilePath = ".\\bestShop-0.0.1-SNAPSHOT.war";
 
 		tomcat.getHost().setAppBase(".");
 
