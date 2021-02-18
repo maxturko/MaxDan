@@ -1,4 +1,4 @@
-package com.mturko.bestshop.model.dto;
+package com.mturko.bestshop.dto;
 
 public class ProductDto {
     private String name;

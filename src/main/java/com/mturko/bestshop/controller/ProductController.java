@@ -1,7 +1,7 @@
 package com.mturko.bestshop.controller;
 
 import com.mturko.bestshop.model.Product;
-import com.mturko.bestshop.model.dto.ProductDto;
+import com.mturko.bestshop.dto.ProductDto;
 import com.mturko.bestshop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

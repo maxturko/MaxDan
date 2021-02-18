@@ -7,7 +7,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bestShop</name>
 	<description>Learning project</description>
-	<packaging>war</packaging>
 
 	<properties>
 		<mysql-connector-version>8.0.22</mysql-connector-version>
@@ -22,6 +21,7 @@
 		<tomcat.version>8.5.23</tomcat.version>
 		<jackson-version>2.11.4</jackson-version>
 		<logback-classic-version>1.2.3</logback-classic-version>
+		<maven-assembly-plugin-version>3.3.0</maven-assembly-plugin-version>
 	</properties>
 
 
@@ -136,10 +136,35 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
+				<artifactId>maven-shade-plugin</artifactId>
 				<configuration>
-					<webXml>src\main\resources\WEB-INF\web.xml</webXml>
+					<createDependencyReducedPom>false</createDependencyReducedPom>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<manifestEntries>
+										<Main-Class>com.mturko.bestshop.BestShopApplication</Main-Class>
+									</manifestEntries>
+								</transformer>
+								<transformer
+										implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.handlers</resource>
+								</transformer>
+								<transformer
+										implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.schemas</resource>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

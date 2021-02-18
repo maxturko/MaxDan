@@ -5,21 +5,27 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee;http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd">
 
 
-<display-name>Spring MVC Application</display-name>
+<display-name>Best shop</display-name>
 
-
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/application-context.xml</param-value>
+    </context-param>
     <servlet>
-        <servlet-name>app1</servlet-name>
+        <servlet-name>app</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-config.xml</param-value>
+            <param-value>WEB-INF/web-context.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>app1</servlet-name>
+        <servlet-name>app</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
