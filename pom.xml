@@ -21,7 +21,7 @@
 		<tomcat.version>8.5.23</tomcat.version>
 		<jackson-version>2.11.4</jackson-version>
 		<logback-classic-version>1.2.3</logback-classic-version>
-		<maven-assembly-plugin-version>3.3.0</maven-assembly-plugin-version>
+		<maven-shade-plugin-version>3.2.4</maven-shade-plugin-version>
 	</properties>
 
 
@@ -137,6 +137,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
+				<version>${maven-shade-plugin-version}</version>
 				<configuration>
 					<createDependencyReducedPom>false</createDependencyReducedPom>
 				</configuration>
