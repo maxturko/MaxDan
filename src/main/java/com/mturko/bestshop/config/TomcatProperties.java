@@ -1,11 +1,10 @@
 package com.mturko.bestshop.config;
 
+import com.mturko.bestshop.BestShopApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -16,10 +15,9 @@ public class TomcatProperties {
     private static Integer port;
     static Logger logger = LoggerFactory.getLogger(TomcatProperties.class);
     static {
+        logger.info(BestShopApplication.class.getResource("/tomcat.properties").toString());
         try (InputStream input =
-                     new BufferedInputStream(
-                             new FileInputStream(
-                                     System.getProperty("user.dir") + "/classes/tomcat.properties"))) {
+                     TomcatProperties.class.getResourceAsStream("/tomcat.properties")) {
             prop.load(input);
             hostname = prop.getProperty("hostname");
             port = Integer.parseInt(prop.getProperty("port"));

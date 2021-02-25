@@ -7,6 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bestShop</name>
 	<description>Learning project</description>
+	<packaging>war</packaging>
 
 	<properties>
 		<mysql-connector-version>8.0.22</mysql-connector-version>
@@ -136,6 +137,14 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webXml>src/main/resources/WEB-INF/web.xml</webXml>
+				</configuration>
+			</plugin>
+			<!--
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>${maven-shade-plugin-version}</version>
 				<configuration>
@@ -167,6 +176,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 		</plugins>
 	</build>
 
