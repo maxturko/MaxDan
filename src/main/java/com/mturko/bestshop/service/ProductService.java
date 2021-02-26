@@ -1,7 +1,7 @@
 package com.mturko.bestshop.service;
 
 import com.mturko.bestshop.model.Product;
-import com.mturko.bestshop.model.dto.ProductDto;
+import com.mturko.bestshop.dto.ProductDto;
 import com.mturko.bestshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -7,9 +7,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bestShop</name>
 	<description>Learning project</description>
+	<packaging>war</packaging>
 
 	<properties>
-		<mysql-connector-version>8.0.12</mysql-connector-version>
+		<mysql-connector-version>8.0.22</mysql-connector-version>
 		<spring-context-version>5.2.12.RELEASE</spring-context-version>
 		<spring-webmvc-version>5.2.12.RELEASE</spring-webmvc-version>
 		<spring-data-jpa-version>2.3.6.RELEASE</spring-data-jpa-version>
@@ -18,7 +19,10 @@
 		<maven-compiler-plugin-version>3.8.0</maven-compiler-plugin-version>
 		<liquibase-maven-plugin-version>3.8.0</liquibase-maven-plugin-version>
 		<slf4j-simple-version>1.7.30</slf4j-simple-version>
-		<servlet-api-version>3.0.1</servlet-api-version>
+		<tomcat.version>8.5.23</tomcat.version>
+		<jackson-version>2.11.4</jackson-version>
+		<logback-classic-version>1.2.3</logback-classic-version>
+		<maven-shade-plugin-version>3.2.4</maven-shade-plugin-version>
 	</properties>
 
 
@@ -63,29 +67,48 @@
 			<version>${spring-orm-version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>${slf4j-simple-version}</version>
-		</dependency>-->
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>${servlet-api-version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<version>${logback-classic-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<version>${tomcat.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<version>${tomcat.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-version}</version>
 		</dependency>
 
 	</dependencies>
 
 	<build>
+		<filters>
+			<filter>src/main/resources/db.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -106,12 +129,54 @@
 						</goals>
 						<phase>process-resources</phase>
 						<configuration>
-							<propertyFile>db.properties</propertyFile>
+							<propertyFile>liquibase.properties</propertyFile>
 							<changeLogFile>db\migration\dbchangelog.xml</changeLogFile>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webXml>src/main/resources/WEB-INF/web.xml</webXml>
+				</configuration>
+			</plugin>
+			<!--
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>${maven-shade-plugin-version}</version>
+				<configuration>
+					<createDependencyReducedPom>false</createDependencyReducedPom>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<manifestEntries>
+										<Main-Class>com.mturko.bestshop.BestShopApplication</Main-Class>
+									</manifestEntries>
+								</transformer>
+								<transformer
+										implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.handlers</resource>
+								</transformer>
+								<transformer
+										implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>META-INF/spring.schemas</resource>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			-->
 		</plugins>
 	</build>
 

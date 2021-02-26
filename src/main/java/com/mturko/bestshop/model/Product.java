@@ -7,10 +7,6 @@ import java.time.LocalDateTime;
 @Table(name = "product")
  public class Product extends AbstractEntity{
 
-//    @Id
-//    @GeneratedValue
-//    @Column(name = "ID")
-//    private Long id;
     private String name;
     private int price;
     private LocalDateTime creationDate;
