@@ -10,9 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations={"file:src/main/resources/WEB-INF/application-context.xml", "file:src/main/resources/WEB-INF/web-context.xml"})
-public class ProductControllerTest {
+public class ProductControllerTest extends AbstractTest{
 
     @Autowired
     ProductController productController;
