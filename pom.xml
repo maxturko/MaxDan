@@ -15,14 +15,19 @@
 		<spring-webmvc-version>5.2.12.RELEASE</spring-webmvc-version>
 		<spring-data-jpa-version>2.3.6.RELEASE</spring-data-jpa-version>
 		<spring-orm-version>5.2.12.RELEASE</spring-orm-version>
+		<spring-test-version>5.2.12.RELEASE</spring-test-version>
 		<hibernate-core-version>5.4.27.Final</hibernate-core-version>
 		<maven-compiler-plugin-version>3.8.0</maven-compiler-plugin-version>
-		<liquibase-maven-plugin-version>3.8.0</liquibase-maven-plugin-version>
+		<liquibase-maven-plugin-version>4.3.1</liquibase-maven-plugin-version>
 		<slf4j-simple-version>1.7.30</slf4j-simple-version>
 		<tomcat.version>8.5.23</tomcat.version>
 		<jackson-version>2.11.4</jackson-version>
 		<logback-classic-version>1.2.3</logback-classic-version>
 		<maven-shade-plugin-version>3.2.4</maven-shade-plugin-version>
+		<junit-jupiter-version>5.7.1</junit-jupiter-version>
+		<maven-surefire-plugin-version>2.22.2</maven-surefire-plugin-version>
+		<maven-war-plugin-version>3.3.1</maven-war-plugin-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 
@@ -46,6 +51,14 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>${spring-data-jpa-version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-test-version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
@@ -97,6 +110,22 @@
 			<version>${jackson-version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit-jupiter-version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit-jupiter-version}</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -138,9 +167,14 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin-version}</version>
 				<configuration>
 					<webXml>src/main/resources/WEB-INF/web.xml</webXml>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin-version}</version>
 			</plugin>
 			<!--
 			<plugin>
