@@ -28,6 +28,7 @@
 		<maven-surefire-plugin-version>2.22.2</maven-surefire-plugin-version>
 		<maven-war-plugin-version>3.3.1</maven-war-plugin-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<h2-version>1.4.200</h2-version>
 	</properties>
 
 
@@ -126,17 +127,21 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2-version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
-		<filters>
-			<filter>src/main/resources/db.properties</filter>
-		</filters>
+
 		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
+
 		</resources>
 		<plugins>
 			<plugin>
@@ -153,12 +158,24 @@
 				<version>${liquibase-maven-plugin-version}</version>
 				<executions>
 					<execution>
+						<id>prod</id>
 						<goals>
 							<goal>update</goal>
 						</goals>
 						<phase>process-resources</phase>
 						<configuration>
 							<propertyFile>liquibase.properties</propertyFile>
+							<changeLogFile>db\migration\dbchangelog.xml</changeLogFile>
+						</configuration>
+					</execution>
+					<execution>
+						<id>liquibasetest</id>
+						<goals>
+							<goal>update</goal>
+						</goals>
+						<phase>generate-test-resources</phase>
+						<configuration>
+							<propertyFile>src/test/resources/liquibase.properties</propertyFile>
 							<changeLogFile>db\migration\dbchangelog.xml</changeLogFile>
 						</configuration>
 					</execution>

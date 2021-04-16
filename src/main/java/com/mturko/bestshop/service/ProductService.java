@@ -19,12 +19,18 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product addProduct(ProductDto productDto) {
-        Product product = new Product();
-        product.setName(productDto.getName());
-        product.setPrice(productDto.getPrice());
+    public Product createProduct(Product product) {
         product.setCreationDate(LocalDateTime.now());
         return productRepository.save(product);
+    }
+
+    public Product updateProduct(Product product) {
+        product.setUpdateDate(LocalDateTime.now());
+        return productRepository.save(product);
+    }
+
+    public void deleteProduct(Product product) {
+        productRepository.delete(product);
     }
 
     public List<Product> getAllProductsByPrice(int price) {
