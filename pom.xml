@@ -169,14 +169,14 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>liquibasetest</id>
+						<id>test</id>
 						<goals>
 							<goal>update</goal>
 						</goals>
 						<phase>generate-test-resources</phase>
 						<configuration>
 							<propertyFile>src/test/resources/liquibase.properties</propertyFile>
-							<changeLogFile>db\migration\dbchangelog.xml</changeLogFile>
+							<changeLogFile>db/migration/dbchangelog.xml</changeLogFile>
 						</configuration>
 					</execution>
 				</executions>

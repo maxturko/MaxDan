@@ -9,69 +9,61 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ProductServiceTest extends AbstractTest{
 
     Logger logger = LoggerFactory.getLogger(ProductServiceTest.class);
-    private static final String productInitialName = "testProduct";
-    private static final int productInitialPrice = 10;
-    private static final String productUpdatedName = "updatedTestProduct";
-    private static final int productUpdatedPrice = 20;
-    private static Product testProduct;
+    private final String productInitialName = "testProduct";
+    private final int productInitialPrice = 10;
+    private final int productUpdatedPrice = 20;
+    private Product expectedProduct;
+    private Product actualProduct;
 
     @Autowired
     ProductService productService;
 
-    @Test
-    void testSpringContextLoadForJunitTests() {
-        assertNotNull(productService);
-    }
-
-    @BeforeAll
-    static void init(){
-        Product product = new Product();
-        product.setName(productInitialName);
-        product.setPrice(productInitialPrice);
-        testProduct = product;
+    @BeforeEach
+    void setup() {
+        Product emptyProduct = productService.getProductByName(productInitialName);
+        Assertions.assertNull(emptyProduct);
+        expectedProduct = new Product();
+        expectedProduct.setName(productInitialName);
+        expectedProduct.setPrice(productInitialPrice);
+        actualProduct = productService.createProduct(expectedProduct);
     }
 
     @Test
-    @Order(1)
     void createProduct() {
-        productService.createProduct(testProduct);
-        List<Product> products = productService.getAllProductsByPrice(10);
-        Product product = products.get(0);
-        Assertions.assertEquals(productInitialPrice, product.getPrice(), "Asserting price is equal to 10");
-        Assertions.assertEquals(1, products.size());
-        Assertions.assertEquals(productInitialName, product.getName());
+        Assertions.assertNotNull(actualProduct);
+        Assertions.assertEquals(productInitialName, actualProduct.getName());
     }
 
     @Test
-    @Order(2)
     void readProduct() {
-        List<Product> listOfProducts = productService.getAllProductsByPrice(productInitialPrice);
-        Assertions.assertTrue(listOfProducts.contains(testProduct));
+        Product actualProductFoundByName = productService.getProductByName(productInitialName);
+        Assertions.assertNotNull(actualProductFoundByName);
+        Assertions.assertEquals(productInitialName, actualProductFoundByName.getName());
+        List<Product> actualProductFoundByPrice = productService.getAllProductsByPrice(productInitialPrice);
+        Assertions.assertTrue(actualProductFoundByPrice.contains(actualProductFoundByName));
     }
 
     @Test
-    @Order(3)
     void updateProduct() {
-        Product product = testProduct;
-        product.setName(productUpdatedName);
-        product.setPrice(productUpdatedPrice);
-        testProduct = productService.updateProduct(product);
-        Assertions.assertEquals(productUpdatedPrice, testProduct.getPrice());
-        Assertions.assertEquals(productUpdatedName, testProduct.getName());
+        expectedProduct.setPrice(productUpdatedPrice);
+        Product updatedProduct = productService.updateProduct(expectedProduct);
+        Assertions.assertNotNull(updatedProduct);
+        Assertions.assertEquals(productUpdatedPrice, updatedProduct.getPrice());
+        expectedProduct = updatedProduct;
     }
 
     @Test
-    @Order(4)
     void deleteProduct() {
-        productService.deleteProduct(testProduct);
-        List<Product> products = productService.getAllProductsByPrice(productUpdatedPrice);
-        Assertions.assertEquals(0, products.size());
+        productService.deleteProduct(expectedProduct);
+        Product deletedProduct = productService.getProductByName(productInitialName);
+        Assertions.assertNull(deletedProduct);
+    }
 
+    @AfterEach
+    void teardown() {
+        productService.deleteProduct(expectedProduct);
     }
 }
