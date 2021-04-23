@@ -165,7 +165,7 @@
 						<phase>process-resources</phase>
 						<configuration>
 							<propertyFile>liquibase.properties</propertyFile>
-							<changeLogFile>db\migration\dbchangelog.xml</changeLogFile>
+							<changeLogFile>db/migration/dbchangelog.xml</changeLogFile>
 						</configuration>
 					</execution>
 					<execution>
