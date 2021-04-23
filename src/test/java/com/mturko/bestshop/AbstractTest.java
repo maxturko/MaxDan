@@ -5,6 +5,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations={"file:src/main/resources/WEB-INF/application-context.xml", "file:src/main/resources/WEB-INF/web-context.xml"})
+@ContextConfiguration(locations={"file:src/main/resources/WEB-INF/application-context.xml"})
 public abstract class AbstractTest {
 }

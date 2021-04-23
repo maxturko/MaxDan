@@ -28,6 +28,9 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public Product addProduct(@RequestBody ProductDto productDto) {
-        return productService.addProduct(productDto);
+        Product product = new Product();
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        return productService.createProduct(product);
     }
 }

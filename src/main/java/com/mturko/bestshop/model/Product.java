@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
     private String name;
     private int price;
     private LocalDateTime creationDate;
+    private LocalDateTime updateDate;
 
     public String getName() {
         return name;
@@ -35,6 +36,14 @@ import java.time.LocalDateTime;
         this.creationDate = creationDate;
     }
 
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -42,6 +51,7 @@ import java.time.LocalDateTime;
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", creationDate=" + creationDate +
+                ", updateDate=" + updateDate +
                 '}';
     }
 }
