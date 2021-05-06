@@ -7,12 +7,14 @@ import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ProductServiceTest extends AbstractTest{
 
     Logger logger = LoggerFactory.getLogger(ProductServiceTest.class);
-    private final String productInitialName = "testProduct";
+    private final String productInitialName = "testProduct-" + Instant.now().toString();
     private final int productInitialPrice = 10;
     private final int productUpdatedPrice = 20;
     private Product expectedProduct;
